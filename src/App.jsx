@@ -1,38 +1,35 @@
+import { BrowserRouter, Routes,  Route, Link } from 'react-router-dom'
 import './App.css'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import HomePage from './components/HomePage'
-import RqSuperHeroesPage from './components/RqSuperHeroesPage'
-import SuperHerosPage from './components/SuperHerosPage'
-
+import { SuperHerosPage } from './components/SuperHerosPage'
+import { RqSuperHeroesPage } from './components/RqSuperHeroesPage'
+import {HomePage} from './components/HomePage'
+import { QueryClientProvider, QueryClient } from 'react-query'
 function App() {
+ 
+  const queryClient = new QueryClient();
+
   return (
-    <>
-      <Router>
+   <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+        <h1>Hello world</h1>
+        <nav>
+        <ul>
+          <li><Link to='/'>Home</Link></li>
+          <li><Link to='/super-heroes'>Super Heroes</Link></li>
+          <li><Link to='/rq-super-heroes'>RQ Super Heroes</Link></li>
+        </ul>
+        </nav>
         <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to='/'>Home</Link>
-                <Link to='/super-heroes'>Traditional Super Heroes</Link>
-                <Link to='/rq-super-heroes'>RQ Super Heroes</Link>
-              </li>
-            </ul>
-          </nav>
-          <Switch>
-            <Route path='/super-heroes'>
-              <SuperHerosPage/>
-            </Route>
-            <Route path='/rq-super-heroes'>
-              <RqSuperHeroesPage/>
-            </Route>
-            <Route path='/'>
-             <HomePage/>
-            </Route>
-          </Switch>
+          <Routes>
+          <Route path='/' element={<HomePage/>}/>
+          <Route path='/super-heroes' element={<SuperHerosPage/>}/>
+          <Route path='/rq-super-heroes' element={<RqSuperHeroesPage/>}/>
+          
+          </Routes>
         </div>
-      </Router>
-    </>
+        </BrowserRouter>
+        </QueryClientProvider>
   )
 }
 
-export default App
+export default App;
