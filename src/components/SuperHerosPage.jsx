@@ -15,7 +15,7 @@ export const SuperHerosPage = () => {
   }, [])
 
   if (isLoading) {
-    return <h2>Loading...</h2>
+    return <h1>Loading...</h1>
   }
 
   return (
@@ -23,8 +23,7 @@ export const SuperHerosPage = () => {
       <h1>Welcome to the traditional Super Heros Page</h1> 
       {
         data.map((hero) => {
-          return <div key={hero.name}>{hero.name}</div>
-          
+          return <li key={hero.name}>{hero.name}</li>
         })
       }
     </>
